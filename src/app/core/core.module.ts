@@ -7,6 +7,11 @@ import { HttpClientRxJSService } from "./services/httpClientRxJS.service";
   imports: [HttpClientModule],
   providers: [HttpClientRxJSService]
 })
+/*
+CoreModule should contain your singleton services,
+single-instance components, and export
+any third-party modules needed in AppModule
+*/
 export class CoreModule {
   constructor(
     @Optional()
