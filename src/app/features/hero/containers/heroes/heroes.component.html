@@ -1,5 +1,11 @@
-<div *ngFor="let hero of heroes">
-  <div class="card-body">
-    <span>{{ hero.firstName }}</span>
+<section *ngIf="!isLoading; else loading">
+  <div *ngFor="let hero of heroes">
+    <div class="card-body">
+      <span>{{ hero.firstName }}</span>
+    </div>
   </div>
-</div>
+</section>
+
+<ng-template #loading>
+  <h2>Loading...</h2>
+</ng-template>
