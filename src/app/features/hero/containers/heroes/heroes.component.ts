@@ -3,6 +3,7 @@ import { Hero } from "../../hero.model";
 import { HttpClientRxJSService } from "../../../../core/services/httpClientRxJS.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Subscription } from "rxjs";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-heroes",
@@ -14,10 +15,15 @@ export class HeroesComponent implements OnInit, OnDestroy {
   isLoading = false;
   sub: Subscription;
   editingTracker = "0";
+  itemForm: FormGroup;
 
-  constructor(private rxjsService: HttpClientRxJSService) {}
+  constructor(
+    private rxjsService: HttpClientRxJSService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.formBuilderInit();
     this.fetchHeroes();
   }
 
@@ -39,8 +45,21 @@ export class HeroesComponent implements OnInit, OnDestroy {
   }
 
   removeHero(id: string) {}
-  onSave() {}
+
+  onSave() {
+    alert("Hello");
+  }
+  
   onUpdate() {}
 
   goToHeroDetail(id: string) {}
+
+  private formBuilderInit(): void {
+    this.itemForm = this.fb.group({
+      firstName: ["", [Validators.required, Validators.minLength(4)]],
+      lastName: ["", [Validators.required, Validators.minLength(4)]],
+      house: [""],
+      knownAs: [""]
+    });
+  }
 }

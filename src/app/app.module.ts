@@ -8,7 +8,12 @@ import { CoreModule } from "./core/core.module";
 
 @NgModule({
   declarations: [AppComponent, NavBarComponent],
-  imports: [BrowserModule, CoreModule, AppRoutingModule, NgbModule],
+  imports: [
+    BrowserModule,
+    CoreModule,
+    AppRoutingModule,
+    NgbModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

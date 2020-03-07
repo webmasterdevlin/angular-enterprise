@@ -1,3 +1,9 @@
+<app-form
+  [itemForm]="itemForm"
+  [text]="'SAVE'"
+  (handleSubmit)="onSave()"
+></app-form>
+
 <section *ngIf="!isLoading; else loading" class="mx-auto">
   <div class="card my-4" style="width: 100%" *ngFor="let hero of heroes">
     <div class="card-body">
