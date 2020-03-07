@@ -13,4 +13,8 @@ export class HttpClientRxJSService {
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroPath);
   }
+
+  // TODO: delete
+  // TODO: post
+  // TODO: put
 }
