@@ -1,1 +1,5 @@
-<p>heroes works!</p>
+<div *ngFor="let hero of heroes">
+  <div class="card-body">
+    <span>{{ hero.firstName }}</span>
+  </div>
+</div>
