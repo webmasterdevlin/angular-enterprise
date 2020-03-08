@@ -48,32 +48,33 @@ export class HeroesComponent implements OnInit, OnDestroy {
     );
   }
 
-  removeHero(id: string) {
-    this.isLoading = true;
-
-    this.subs.sink = this.rxjsService.deleteHeroById(id).subscribe(
-      () => (this.heroes = this.heroes.filter(h => h.id !== id)),
-      (err: HttpErrorResponse) => {
-        this.isLoading = false;
-        console.log(err.message);
-      },
-      () => (this.isLoading = false)
-    );
-  }
-
-  /**Optimistic update */
+  /**Pessimistic update */
   // removeHero(id: string) {
-  //   const prevData: Hero[] = [...this.heroes];
-
-  //   this.heroes = this.heroes.filter(h => h.id !== id);
-  //   this.rxjsService.deleteHeroById(id + 2312).pipe(
-  //     catchError((err: HttpErrorResponse) => {
-  //       console.log(err.statusText);
-  //       alert("hello");
-  //       return (this.heroes = prevData);
-  //     })
+  //   this.isLoading = true;
+  //   this.subs.sink = this.rxjsService.deleteHeroById(id).subscribe(
+  //     () => (this.heroes = this.heroes.filter(h => h.id !== id)),
+  //     (err: HttpErrorResponse) => {
+  //       this.isLoading = false;
+  //       console.log(err.message);
+  //     },
+  //     () => (this.isLoading = false)
   //   );
   // }
+
+  /**Optimistic update */
+  removeHero(id: string) {
+    const prevData: Hero[] = [...this.heroes];
+    this.heroes = this.heroes.filter(h => h.id !== id);
+    this.subs.sink = this.rxjsService
+      .deleteHeroById(id + "x")
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          console.log(err.statusText);
+          return (this.heroes = prevData);
+        })
+      )
+      .subscribe();
+  }
 
   onSave() {
     this.isLoading = true;

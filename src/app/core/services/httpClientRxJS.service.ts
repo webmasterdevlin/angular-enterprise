@@ -15,11 +15,7 @@ export class HttpClientRxJSService {
   }
 
   deleteHeroById(id: string): Observable<void> {
-    return this.http
-      .delete<void>(`${this.heroPath}/${id}`)
-      .pipe
-      // TODO: catchError()
-      ();
+    return this.http.delete<void>(`${this.heroPath}/${id}`);
   }
 
   postHero(createdHero: Hero): Observable<Hero> {
