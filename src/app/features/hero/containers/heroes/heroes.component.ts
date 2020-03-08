@@ -6,6 +6,7 @@ import { Subscription } from "rxjs";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { catchError } from "rxjs/operators";
 import { SubSink } from "subsink";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-heroes",
@@ -23,7 +24,8 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
   constructor(
     private rxjsService: HttpClientRxJSService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -108,7 +110,9 @@ export class HeroesComponent implements OnInit, OnDestroy {
     );
   }
 
-  goToHeroDetail(id: string) {}
+  goToHeroDetail(id: string) {
+    this.router.navigateByUrl("/heroes/hero-detail/" + id);
+  }
 
   private formBuilderInit(): void {
     this.itemForm = this.fb.group({
