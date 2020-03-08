@@ -3,14 +3,14 @@ import { CommonModule } from "@angular/common";
 import { HeroesComponent } from "./containers/heroes/heroes.component";
 import { HeroDetailComponent } from "./containers/hero-detail/hero-detail.component";
 import { Routes, RouterModule } from "@angular/router";
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from "src/app/shared/shared.module";
 const routes: Routes = [
   {
     path: "",
     component: HeroesComponent
   },
   {
-    path: "hero-detail/:id",
+    path: "hero-detail/:foo",
     component: HeroDetailComponent
   }
 ];
