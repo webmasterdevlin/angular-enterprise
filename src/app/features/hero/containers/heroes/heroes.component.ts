@@ -17,6 +17,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
   isLoading = false;
   editingTracker = "0";
   itemForm: FormGroup;
+  editedForm: FormGroup;
 
   private subs = new SubSink();
 
@@ -90,12 +91,34 @@ export class HeroesComponent implements OnInit, OnDestroy {
     );
   }
 
-  onUpdate() {}
+  onUpdate() {
+    const hero = this.editedForm.value;
+    this.isLoading = true;
+    this.subs.sink = this.rxjsService.putHero(hero).subscribe(
+      () => {
+        const index = this.heroes.findIndex(h => h.id === hero.id);
+        this.heroes[index] = hero;
+      },
+      (err: HttpErrorResponse) => {
+        this.isLoading = false;
+        console.log(err.statusText);
+      },
+      () => (this.isLoading = false)
+    );
+  }
 
   goToHeroDetail(id: string) {}
 
   private formBuilderInit(): void {
     this.itemForm = this.fb.group({
+      firstName: ["", [Validators.required, Validators.minLength(4)]],
+      lastName: ["", [Validators.required, Validators.minLength(4)]],
+      house: [""],
+      knownAs: [""]
+    });
+
+    this.editedForm = this.fb.group({
+      id: [""],
       firstName: ["", [Validators.required, Validators.minLength(4)]],
       lastName: ["", [Validators.required, Validators.minLength(4)]],
       house: [""],

@@ -10,7 +10,11 @@
   <div class="card my-4" style="width: 100%" *ngFor="let hero of heroes">
     <div class="card-body">
       <div *ngIf="editingTracker === hero.id">
-        <h3>Im a form</h3>
+        <app-form
+          [itemForm]="editedForm"
+          [text]="'UPDATE'"
+          (handleSubmit)="onUpdate()"
+        ></app-form>
       </div>
       <div *ngIf="editingTracker !== hero.id" class="mb-3">
         <h5 class="card-title">
@@ -30,7 +34,7 @@
         <button
           *ngIf="editingTracker !== hero.id"
           class="btn btn-primary mr-2"
-          (click)="editingTracker = hero.id"
+          (click)="editingTracker = hero.id; editedForm.patchValue(hero)"
         >
           EDIT
         </button>
