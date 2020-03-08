@@ -16,6 +16,8 @@ import {
 
 @Component({
   selector: "app-heroes",
+  templateUrl: "./heroes.component.html",
+  styleUrls: ["./heroes.component.css"],
   animations: [
     trigger("openClose", [
       state(
@@ -31,11 +33,9 @@ import {
         })
       ),
       transition("open => closed", [animate("2s")]),
-      transition("closed => open", [animate("1s")])
+      transition("closed => open", [animate("2s")])
     ])
-  ],
-  templateUrl: "./heroes.component.html",
-  styleUrls: ["./heroes.component.css"]
+  ]
 })
 export class HeroesComponent implements OnInit, OnDestroy {
   heroes: Hero[];
