@@ -1,8 +1,15 @@
-<app-form
-  [itemForm]="itemForm"
-  [text]="'SAVE'"
-  (handleSubmit)="onSave()"
-></app-form>
+<div>
+  <div [@openClose]="isOpen ? 'open' : 'closed'">
+    <app-form
+      [itemForm]="itemForm"
+      [text]="'SAVE'"
+      (handleSubmit)="onSave()"
+    ></app-form>
+  </div>
+  <button (click)="toggle()" class="btn btn-info">
+    {{ isOpen ? "Close" : "Open" }}
+  </button>
+</div>
 
 <section *ngIf="!isLoading; else loading" class="mx-auto">
   <div class="card my-4" style="width: 100%" *ngFor="let hero of heroes">

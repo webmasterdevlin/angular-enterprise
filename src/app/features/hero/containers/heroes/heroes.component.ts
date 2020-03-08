@@ -2,14 +2,38 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Hero } from "../../hero.model";
 import { HttpClientRxJSService } from "../../../../core/services/httpClientRxJS.service";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Subscription } from "rxjs";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { catchError } from "rxjs/operators";
 import { SubSink } from "subsink";
 import { Router } from "@angular/router";
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from "@angular/animations";
 
 @Component({
   selector: "app-heroes",
+  animations: [
+    trigger("openClose", [
+      state(
+        "open",
+        style({
+          transform: "scale(1)"
+        })
+      ),
+      state(
+        "closed",
+        style({
+          transform: "scale(0.01)"
+        })
+      ),
+      transition("open => closed", [animate("2s")]),
+      transition("closed => open", [animate("1s")])
+    ])
+  ],
   templateUrl: "./heroes.component.html",
   styleUrls: ["./heroes.component.css"]
 })
@@ -19,6 +43,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
   editingTracker = "0";
   itemForm: FormGroup;
   editedForm: FormGroup;
+  isOpen = false;
 
   private subs = new SubSink();
 
@@ -35,6 +60,10 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  toggle() {
+    this.isOpen = !this.isOpen;
   }
 
   fetchHeroes() {
