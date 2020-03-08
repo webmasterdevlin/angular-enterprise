@@ -23,13 +23,15 @@ import {
       state(
         "open",
         style({
-          transform: "scale(1)"
+          transform: "scale(1)",
+          opacity: 1
         })
       ),
       state(
         "closed",
         style({
-          transform: "scale(0.01)"
+          transform: "scale(0.01)",
+          opacity: 0.01
         })
       ),
       transition("open => closed", [animate("2s")]),
