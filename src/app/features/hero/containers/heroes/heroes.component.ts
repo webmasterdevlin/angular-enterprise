@@ -66,7 +66,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
     const prevData: Hero[] = [...this.heroes];
     this.heroes = this.heroes.filter(h => h.id !== id);
     this.subs.sink = this.rxjsService
-      .deleteHeroById(id + 123)
+      .deleteHeroById(id)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           console.log(err.statusText);
