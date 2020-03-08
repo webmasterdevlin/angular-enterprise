@@ -5,6 +5,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Subscription } from "rxjs";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { catchError } from "rxjs/operators";
+import { SubSink } from "subsink";
 
 @Component({
   selector: "app-heroes",
@@ -14,9 +15,10 @@ import { catchError } from "rxjs/operators";
 export class HeroesComponent implements OnInit, OnDestroy {
   heroes: Hero[];
   isLoading = false;
-  sub: Subscription;
   editingTracker = "0";
   itemForm: FormGroup;
+
+  private subs = new SubSink();
 
   constructor(
     private rxjsService: HttpClientRxJSService,
@@ -29,13 +31,13 @@ export class HeroesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.subs.unsubscribe();
   }
 
   fetchHeroes() {
     this.isLoading = true;
 
-    this.sub = this.rxjsService.getHeroes().subscribe(
+    this.subs.sink = this.rxjsService.getHeroes().subscribe(
       data => (this.heroes = data),
       (err: HttpErrorResponse) => {
         this.isLoading = false;
@@ -47,7 +49,8 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
   removeHero(id: string) {
     this.isLoading = true;
-    this.rxjsService.deleteHeroById(id).subscribe(
+
+    this.subs.sink = this.rxjsService.deleteHeroById(id).subscribe(
       () => (this.heroes = this.heroes.filter(h => h.id !== id)),
       (err: HttpErrorResponse) => {
         this.isLoading = false;
@@ -72,7 +75,19 @@ export class HeroesComponent implements OnInit, OnDestroy {
   // }
 
   onSave() {
-    
+    this.isLoading = true;
+
+    this.subs.sink = this.rxjsService.postHero(this.itemForm.value).subscribe(
+      data => this.heroes.push(data),
+      (err: HttpErrorResponse) => {
+        this.isLoading = false;
+        console.log(err.message);
+      },
+      () => {
+        this.isLoading = false;
+        this.itemForm.reset();
+      }
+    );
   }
 
   onUpdate() {}
