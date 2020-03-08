@@ -8,6 +8,17 @@
       type="text"
       autocomplete="off"
     />
+    <div
+      class="alert alert-danger mt-1"
+      role="alert"
+      *ngIf="fn.invalid && (fn.dirty || fn.touched)"
+    >
+      {{
+        fn.errors.minlength
+          ? "first name must be at least 4 characters long."
+          : "required"
+      }}
+    </div>
   </div>
   <div class="form-group">
     <label for="lastName">Last Name</label>
@@ -18,6 +29,17 @@
       type="text"
       autocomplete="off"
     />
+  </div>
+  <div
+    class="alert alert-danger mt-1"
+    role="alert"
+    *ngIf="ln.invalid && (ln.dirty || ln.touched)"
+  >
+    {{
+      ln.errors.minlength
+        ? "last name must be at least 4 characters long."
+        : "required"
+    }}
   </div>
   <div class="form-group">
     <label for="house">House</label>

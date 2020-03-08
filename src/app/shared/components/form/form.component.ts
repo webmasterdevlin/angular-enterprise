@@ -19,4 +19,12 @@ export class FormComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  get fn() {
+    return this.itemForm.get("firstName");
+  }
+
+  get ln() {
+    return this.itemForm.get("lastName");
+  }
 }
