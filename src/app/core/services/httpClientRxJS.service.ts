@@ -15,7 +15,11 @@ export class HttpClientRxJSService {
   }
 
   deleteHeroById(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.heroPath}/${id}`);
+    return this.http
+      .delete<void>(`${this.heroPath}/${id}`)
+      .pipe
+      // TODO: catchError()
+      ();
   }
 
   // TODO: post
