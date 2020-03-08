@@ -14,7 +14,10 @@ export class HttpClientRxJSService {
     return this.http.get<Hero[]>(this.heroPath);
   }
 
-  // TODO: delete
+  deleteHeroById(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.heroPath}/${id}`);
+  }
+
   // TODO: post
   // TODO: put
 }
