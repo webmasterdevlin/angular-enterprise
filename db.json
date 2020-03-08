@@ -27,6 +27,13 @@
       "lastName": "Wayne",
       "house": "DC",
       "knownAs": "Batman"
+    },
+    {
+      "firstName": "Tony",
+      "lastName": "Stark",
+      "house": "Marvel",
+      "knownAs": "Ironman",
+      "id": "Nqp78cD"
     }
   ],
   "villains": []
