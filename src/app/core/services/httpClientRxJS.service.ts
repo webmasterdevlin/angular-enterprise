@@ -22,6 +22,9 @@ export class HttpClientRxJSService {
       ();
   }
 
-  // TODO: post
+  postHero(createdHero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroPath, createdHero);
+  }
+
   // TODO: put
 }
