@@ -2,30 +2,26 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
-import { Hero } from "../../features/hero/hero.model";
 
 @Injectable()
 export class HttpClientRxJSService {
-  heroPath = environment.apiUrlBase + "heroes";
+  path = environment.apiUrlBase;
 
   constructor(private http: HttpClient) {}
 
-  getHeroes(): Observable<Hero[]> {
-    return this.http.get<Hero[]>(this.heroPath);
+  get<T>(url: string): Observable<T> {
+    return this.http.get<T>(this.path + url);
   }
 
-  deleteHeroById(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.heroPath}/${id}`);
+  deleteById(url: string, id: string): Observable<void> {
+    return this.http.delete<void>(`${this.path + url}/${id}`);
   }
 
-  postHero(createdHero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroPath, createdHero);
+  post<T>(url: string, object: T): Observable<T> {
+    return this.http.post<T>(this.path + url, object);
   }
 
-  putHero(updatedHero: Hero): Observable<void> {
-    return this.http.put<void>(
-      `${this.heroPath}/${updatedHero.id}`,
-      updatedHero
-    );
+  put<T>(url: string, id: string, object: T): Observable<void> {
+    return this.http.put<void>(`${this.path + url}/${id}`, object);
   }
 }

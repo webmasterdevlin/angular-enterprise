@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Hero } from "../../hero.model";
+import { Villain } from "../../villain.model";
 import { HttpClientRxJSService } from "../../../../core/services/httpClientRxJS.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
@@ -18,9 +18,9 @@ import { of } from "rxjs";
 
 @UntilDestroy()
 @Component({
-  selector: "app-heroes",
-  templateUrl: "./heroes.component.html",
-  styleUrls: ["./heroes.component.css"],
+  selector: "app-villains",
+  templateUrl: "./villains.component.html",
+  styleUrls: ["./villains.component.css"],
   animations: [
     trigger("openClose", [
       state(
@@ -42,9 +42,9 @@ import { of } from "rxjs";
     ]),
   ],
 })
-export class HeroesComponent implements OnInit, OnDestroy {
-  endpoint = "heroes";
-  heroes: Hero[];
+export class VillainsComponent implements OnInit, OnDestroy {
+  endpoint = "villains";
+  villains: Villain[];
   isLoading = false;
   editingTracker = "0";
   itemForm: FormGroup;
@@ -61,7 +61,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formBuilderInit();
-    this.fetchHeroes();
+    this.fetchVillains();
   }
 
   ngOnDestroy(): void {
@@ -72,13 +72,13 @@ export class HeroesComponent implements OnInit, OnDestroy {
     this.isOpen = !this.isOpen;
   }
 
-  fetchHeroes() {
+  fetchVillains() {
     this.isLoading = true;
 
     this.rxjsService
-      .get<Hero[]>(this.endpoint)
+      .get<Villain[]>(this.endpoint)
       .pipe(
-        map((data) => (this.heroes = data)),
+        map((data) => (this.villains = data)),
         catchError((err: HttpErrorResponse) => of(err.message)),
         tap(() => (this.isLoading = false)),
         untilDestroyed(this)
@@ -87,14 +87,14 @@ export class HeroesComponent implements OnInit, OnDestroy {
   }
 
   /**Optimistic update */
-  removeHero(id: string) {
-    const prevData: Hero[] = [...this.heroes];
-    this.heroes = this.heroes.filter((h) => h.id !== id);
+  removeVillain(id: string) {
+    const prevData: Villain[] = [...this.villains];
+    this.villains = this.villains.filter((h) => h.id !== id);
     this.subs.sink = this.rxjsService
       .deleteById(this.endpoint, id)
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          this.heroes = prevData;
+          this.villains = prevData;
           return of(err.message);
         }),
         untilDestroyed(this)
@@ -108,7 +108,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
     this.rxjsService
       .post(this.endpoint, this.itemForm.value)
       .pipe(
-        map((data) => (this.heroes = [...this.heroes, data])),
+        map((data) => (this.villains = [...this.villains, data])),
         catchError((err: HttpErrorResponse) => of(err.message)),
         tap(() => {
           this.isLoading = false;
@@ -120,15 +120,15 @@ export class HeroesComponent implements OnInit, OnDestroy {
   }
 
   onUpdate() {
-    const hero = this.editedForm.value;
+    const villain = this.editedForm.value;
     this.isLoading = true;
 
     this.rxjsService
-      .put<Hero>(this.endpoint, hero.id, hero)
+      .put<Villain>(this.endpoint, villain.id, villain)
       .pipe(
         map(() => {
-          const index = this.heroes.findIndex((h) => h.id === hero.id);
-          this.heroes[index] = hero;
+          const index = this.villains.findIndex((h) => h.id === villain.id);
+          this.villains[index] = villain;
         }),
         catchError((err: HttpErrorResponse) => of(err.message)),
         tap(() => (this.isLoading = false)),
@@ -137,8 +137,8 @@ export class HeroesComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  async goToHeroDetail(id: string) {
-    await this.router.navigateByUrl("/heroes/hero-detail/" + id);
+  async goToVillainDetail(id: string) {
+    await this.router.navigateByUrl("/villains/villain-detail/" + id);
   }
 
   private formBuilderInit(): void {

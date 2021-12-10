@@ -1,15 +1,8 @@
 {
   "heroes": [
     {
-      "id": "7ggew732dw",
-      "firstName": "Barry",
-      "lastName": "Allen",
-      "house": "DC",
-      "knownAs": "Flash"
-    },
-    {
       "id": "1ggew732dw",
-      "firstName": "Scott",
+      "firstName": "Scott - UPDATED",
       "lastName": "Summer",
       "house": "Marvel",
       "knownAs": "Cyclopes"
@@ -34,7 +27,43 @@
       "house": "Marvel",
       "knownAs": "Ironman",
       "id": "Nqp78cD"
+    },
+    {
+      "firstName": "devlin",
+      "lastName": "duldulao",
+      "house": "",
+      "knownAs": "",
+      "id": "RIPB6ub"
     }
   ],
-  "villains": []
+  "villains": [
+    {
+      "firstName": "Lex",
+      "lastName": "Luther",
+      "house": "DC",
+      "knownAs": "Lex",
+      "id": "3290fhe"
+    },
+    {
+      "firstName": "Max",
+      "lastName": "Eisenhardt",
+      "house": "Marvel",
+      "knownAs": "Magneto",
+      "id": "6r8finlfy"
+    },
+    {
+      "firstName": "Darkseid",
+      "lastName": "none",
+      "house": "DC",
+      "knownAs": "The ruler of Apokolops",
+      "id": "87rfyvivlf78"
+    },
+    {
+      "firstName": "Victor",
+      "lastName": "Von Doom",
+      "house": "Marvel",
+      "knownAs": "Doctor Doom",
+      "id": "97fyiyif"
+    }
+  ]
 }

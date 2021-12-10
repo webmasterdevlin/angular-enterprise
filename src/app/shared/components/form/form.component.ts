@@ -7,7 +7,7 @@ import { FormGroup } from "@angular/forms";
   styleUrls: ["./form.component.css"],
 })
 export class FormComponent implements OnInit {
-  @Input() itemForm: FormGroup | any;
+  @Input() itemForm: FormGroup;
   @Input() text: string;
 
   @Output() handleSubmit = new EventEmitter<void>();
