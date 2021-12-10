@@ -11,7 +11,7 @@ import {
   state,
   style,
   animate,
-  transition
+  transition,
 } from "@angular/animations";
 
 @Component({
@@ -24,20 +24,20 @@ import {
         "open",
         style({
           transform: "scale(1)",
-          opacity: 1
+          opacity: 1,
         })
       ),
       state(
         "closed",
         style({
           transform: "scale(0.01)",
-          opacity: 0.01
+          opacity: 0.01,
         })
       ),
       transition("open => closed", [animate("2s")]),
-      transition("closed => open", [animate("2s")])
-    ])
-  ]
+      transition("closed => open", [animate("2s")]),
+    ]),
+  ],
 })
 export class HeroesComponent implements OnInit, OnDestroy {
   heroes: Hero[];
@@ -72,7 +72,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     this.subs.sink = this.rxjsService.getHeroes().subscribe(
-      data => (this.heroes = data),
+      (data) => (this.heroes = data),
       (err: HttpErrorResponse) => {
         this.isLoading = false;
         console.log(err.statusText);
@@ -97,7 +97,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
   /**Optimistic update */
   removeHero(id: string) {
     const prevData: Hero[] = [...this.heroes];
-    this.heroes = this.heroes.filter(h => h.id !== id);
+    this.heroes = this.heroes.filter((h) => h.id !== id);
     this.subs.sink = this.rxjsService
       .deleteHeroById(id)
       .pipe(
@@ -113,7 +113,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     this.subs.sink = this.rxjsService.postHero(this.itemForm.value).subscribe(
-      data => this.heroes.push(data),
+      (data) => this.heroes.push(data),
       (err: HttpErrorResponse) => {
         this.isLoading = false;
         console.log(err.message);
@@ -130,7 +130,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.subs.sink = this.rxjsService.putHero(hero).subscribe(
       () => {
-        const index = this.heroes.findIndex(h => h.id === hero.id);
+        const index = this.heroes.findIndex((h) => h.id === hero.id);
         this.heroes[index] = hero;
       },
       (err: HttpErrorResponse) => {
@@ -150,7 +150,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
       firstName: ["", [Validators.required, Validators.minLength(4)]],
       lastName: ["", [Validators.required, Validators.minLength(4)]],
       house: [""],
-      knownAs: [""]
+      knownAs: [""],
     });
 
     this.editedForm = this.fb.group({
@@ -158,7 +158,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
       firstName: ["", [Validators.required, Validators.minLength(4)]],
       lastName: ["", [Validators.required, Validators.minLength(4)]],
       house: [""],
-      knownAs: [""]
+      knownAs: [""],
     });
   }
 }

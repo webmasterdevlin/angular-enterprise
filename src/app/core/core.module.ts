@@ -5,9 +5,8 @@ import { HttpClientRxJSService } from "./services/httpClientRxJS.service";
 @NgModule({
   declarations: [],
   imports: [HttpClientModule],
-  providers: [HttpClientRxJSService]
+  providers: [HttpClientRxJSService],
 })
-
 export class CoreModule {
   constructor(
     @Optional()

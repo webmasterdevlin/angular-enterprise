@@ -5,21 +5,21 @@ const routes: Routes = [
   {
     path: "",
     redirectTo: "heroes",
-    pathMatch: "full"
+    pathMatch: "full",
   },
   {
     path: "heroes",
     loadChildren: () =>
-      import("./features/hero/hero.module").then(m => m.HeroModule)
+      import("./features/hero/hero.module").then((m) => m.HeroModule),
   },
   {
     path: "**",
-    redirectTo: ""
-  }
+    redirectTo: "",
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
