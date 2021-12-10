@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Villain } from "../../villain.model";
 import { HttpClientRxJSService } from "../../../../core/services/httpClientRxJS.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { catchError, map, tap } from "rxjs/operators";
-import { SubSink } from "subsink";
 import { Router } from "@angular/router";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import {
@@ -16,7 +15,7 @@ import {
 } from "@angular/animations";
 import { of } from "rxjs";
 
-@UntilDestroy()
+@UntilDestroy() // for unsubscribing from observables
 @Component({
   selector: "app-villains",
   templateUrl: "./villains.component.html",
@@ -42,7 +41,7 @@ import { of } from "rxjs";
     ]),
   ],
 })
-export class VillainsComponent implements OnInit, OnDestroy {
+export class VillainsComponent implements OnInit {
   endpoint = "villains";
   villains: Villain[];
   isLoading = false;
@@ -50,8 +49,6 @@ export class VillainsComponent implements OnInit, OnDestroy {
   itemForm: FormGroup;
   editedForm: FormGroup;
   isOpen = false;
-
-  private subs = new SubSink();
 
   constructor(
     private rxjsService: HttpClientRxJSService,
@@ -62,10 +59,6 @@ export class VillainsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.formBuilderInit();
     this.fetchVillains();
-  }
-
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
   }
 
   toggle() {
@@ -90,7 +83,7 @@ export class VillainsComponent implements OnInit, OnDestroy {
   removeVillain(id: string) {
     const prevData: Villain[] = [...this.villains];
     this.villains = this.villains.filter((h) => h.id !== id);
-    this.subs.sink = this.rxjsService
+    this.rxjsService
       .deleteById(this.endpoint, id)
       .pipe(
         catchError((err: HttpErrorResponse) => {
