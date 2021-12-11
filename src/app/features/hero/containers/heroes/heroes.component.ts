@@ -49,11 +49,11 @@ export class HeroesComponent implements OnInit {
 
   /* these are for creating */
   itemForm: FormGroup;
-  editedForm: FormGroup;
   isOpen = false;
 
   /* this will help select a particular object from the list */
   editingTracker = "0";
+  editedForm: FormGroup;
 
   constructor(
     private rxjsService: HttpClientRxJSService,

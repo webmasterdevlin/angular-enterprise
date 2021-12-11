@@ -9,6 +9,14 @@
 - angular material
 - prime ng
 
+## Cheat Sheet
+
+- https://www.digitalocean.com/community/tutorials/angular-angular-cli-reference
+
+## Chrome Extension
+
+- https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh
+
 ## Create pages and routers
 
 - npm i -D prettier
@@ -49,7 +57,7 @@ ng g c features/villain/containers/villains
 
 ## Create navigation bar
 
-- create a component, shared/nav-bar/nav-bar.component.ts, to display the navigation bar
+- create a component, nav-bar/nav-bar.component.ts, to display the navigation bar
 - Add links/menus for different pages in the NavigationBar
 - run the application and try to navigate using the menus
 - create styling for the navigation bar
@@ -58,6 +66,7 @@ ng g c features/villain/containers/villains
 
 - set up the core module
 - set up the generic http service using rxjs
+- import the core module in the app.module.ts
 
 ## Model/Schema
 
@@ -87,6 +96,40 @@ ng g c features/villain/containers/villains
 - inject the Router in the constructor
 - create a method, goToHeroDetail, in heroes component
 - create a method, goToVillainDetail in villains component
-- use the goToHeroDetail method in the click event of the Detail buttons of heroes and villains pages
+- use the goToHeroDetail method in the click event of the Detail buttons of heroes and villains pages html
 - in the hero-detail and villain-detail pages, inject the ActivatedRoute
 - create a method, getHero and getVillain in the hero-detail and villain-detail components
+
+## Delete a hero and villain
+
+- create a method, removeHero and removeVillain in the heroes and villains components
+- use the methods in the click event of the delete buttons of heroes and villains components html
+
+## Create a form
+
+- create a shared module
+
+```bash
+ng g m shared
+```
+
+- create a reusable form component, shared/components/form/form.component.ts
+- use @Input decorators to pass the form to the form component
+- use @Output decorator to emit an event
+
+## Add a hero and villain
+
+- create properties namely itemForm and isOpen in the heroes and villains components
+- inject the FormBuilder in the constructor of the heroes and villains components
+- create a method formBuilderInit for itemForm initialization
+- create a method, toggle and onSave in the heroes and villains components
+- use the reusable form component in the heroes and villains components html
+
+## Update a hero and villain
+
+- create properties namely editingTracker and editForm in the heroes and villains components
+- add editedForm in the formBuilderInit method
+- create onUpdate method in the heroes and villains components
+- use another reusable form component in the heroes and villains components html for the update form
+- use the tracking property and the \*ngIf directive to display the update form if editing is same as id
+- use the edit button's click event to assign id to editingTracker and toggle the form

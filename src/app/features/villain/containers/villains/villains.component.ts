@@ -50,10 +50,10 @@ export class VillainsComponent implements OnInit {
   /* these are for creating */
   itemForm: FormGroup;
   editedForm: FormGroup;
-  isOpen = false;
 
   /* this will help select a particular object from the list */
   editingTracker = "0";
+  isOpen = false;
 
   constructor(
     private rxjsService: HttpClientRxJSService,
