@@ -16,9 +16,11 @@
 #### Future pages will be registered in your router.
 
 - npm i -D prettier
-- create a page ./src/features/hero/containers/heroes/heroes.component.ts and say hello world
 - create a module for the hero feature's code splitting ./src/features/hero/hero.module.ts
+- create a module for the hero feature's code splitting ./src/features/hero/hero.module.ts
+- create a page ./src/features/hero/containers/heroes/heroes.component.ts and say hello world
 - create a module, app-routing.module.ts, to register the pages
+- 
 - run the application and navigate to different pages using the URL field of the browser
 - create another component for routing and name it LazyRoutes.tsx
 - register the pages in the LazyRoutes
