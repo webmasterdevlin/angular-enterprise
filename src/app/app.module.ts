@@ -6,9 +6,10 @@ import { AppComponent } from "./app.component";
 import { NavBarComponent } from "./shared/components/nav-bar/nav-bar.component";
 import { CoreModule } from "./core/core.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent],
+  declarations: [AppComponent, NavBarComponent, HomeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

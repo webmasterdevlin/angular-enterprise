@@ -11,11 +11,13 @@
 
 ## Create pages and routers
 
-#### Setting up the routers is a one time setup.
-
-#### Future pages will be registered in your router.
-
 - npm i -D prettier
+- create a home page
+
+```bash
+ng g m pages/home
+```
+
 - create a module for the hero feature's code splitting ./src/features/hero/hero.module.ts
 
 ```bash
