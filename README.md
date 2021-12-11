@@ -76,8 +76,8 @@ ng g c features/villain/containers/villains
 
 - create the properties namely endpoint, heroes, and isLoading as the local states of the heroes and villains components
 - inject the HttpClientRxJSService in the constructor
-- create a function to fetch the heroes and villains
-- insert the fetch function to the ngOnInit hook
+- create a method to fetch the heroes and villains
+- insert the fetch method to the ngOnInit hook
 - run the application with json-server
 - check the dev tools network tab to see the response
 - render the heroes and villains using the \*ngFor directive
@@ -85,5 +85,8 @@ ng g c features/villain/containers/villains
 ## Navigate to hero detail and villain detail
 
 - inject the Router in the constructor
-- create a function, goToHeroDetail, in heroes component
-- create a function, goToVillainDetail in villains component
+- create a method, goToHeroDetail, in heroes component
+- create a method, goToVillainDetail in villains component
+- use the goToHeroDetail method in the click event of the Detail buttons of heroes and villains pages
+- in the hero-detail and villain-detail pages, inject the ActivatedRoute
+- create a method, getHero and getVillain in the hero-detail and villain-detail components
