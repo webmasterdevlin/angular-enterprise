@@ -42,13 +42,18 @@ import { of } from "rxjs";
   ],
 })
 export class HeroesComponent implements OnInit {
+  /* these are for rendering the heroes */
   endpoint = "heroes";
   heroes: Hero[];
   isLoading = false;
-  editingTracker = "0";
+
+  /* these are for creating */
   itemForm: FormGroup;
   editedForm: FormGroup;
   isOpen = false;
+
+  /* this will help select a particular object from the list */
+  editingTracker = "0";
 
   constructor(
     private rxjsService: HttpClientRxJSService,
