@@ -85,4 +85,5 @@ ng g c features/villain/containers/villains
 ## Navigate to hero detail and villain detail
 
 - inject the Router in the constructor
-- create a function, goToHeroDetail, and also a function, goToVillainDetail
+- create a function, goToHeroDetail, in heroes component
+- create a function, goToVillainDetail in villains component

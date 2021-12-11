@@ -32,21 +32,21 @@
         <button
           *ngIf="editingTracker === villain.id"
           (click)="editingTracker = '0'"
-          class="btn btn-outline-primary mr-2"
+          class="btn btn-outline-primary me-3"
         >
           CANCEL
         </button>
 
         <button
           *ngIf="editingTracker !== villain.id"
-          class="btn btn-primary mr-2"
+          class="btn btn-primary me-3"
           (click)="editingTracker = villain.id; editedForm.patchValue(villain)"
         >
           EDIT
         </button>
         <button
           (click)="goToVillainDetail(villain.id)"
-          class="btn btn-info mr-2"
+          class="btn btn-info me-3"
         >
           DETAIL
         </button>
@@ -59,7 +59,5 @@
 </section>
 
 <ng-template #loading>
-  <div class="spinner-grow text-primary" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
+  <div class="spinner-grow text-primary m-5" role="status"></div>
 </ng-template>
